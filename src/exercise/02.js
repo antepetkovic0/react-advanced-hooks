@@ -24,7 +24,7 @@ function useSafeDispatch(dispatch) {
   return React.useCallback(
     (...args) => {
       if (mountedRef.current) {
-        dispatch(args)
+        dispatch(...args)
       }
     },
     [dispatch],
@@ -88,7 +88,8 @@ function PokemonInfo({pokemonName}) {
     if (!pokemonName) {
       return
     }
-    fetch(fetchPokemon(pokemonName))
+    const promise = fetchPokemon(pokemonName)
+    fetch(promise)
   }, [pokemonName, fetch])
 
   switch (status) {
